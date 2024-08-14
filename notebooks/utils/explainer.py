@@ -12,7 +12,7 @@ class Explainer:
             system_prompt = "You are assistant for IT specialist who doesn't know NLP."
         self.basic_system_prompt = system_prompt
 
-        self.config = {"model": "hugging-quants/Meta-Llama-3.1-8B-Instruct-AWQ-INT4", "api_base": "http://localhost:8000/v1", "api_key": "EMPTY"}
+        self.config = DEFAULT_MODEL
 
         self.client_explainer = OpenAI(base_url=self.config['api_base'], api_key = self.config['api_key'])
 
