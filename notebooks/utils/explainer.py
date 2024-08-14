@@ -18,12 +18,20 @@ class Explainer:
 
     def llm_call(self, prompts, additional_system_prompt=""):
         system_prompt = self.basic_system_prompt + additional_system_prompt
-
-        completion = self.client_explainer.chat.completions.create(
-            model=self.config["model"],
-            temperature=0,
-            messages=[{"role": "system", "content": system_prompt},
-                        {"role": "user", "content": prompts}])
+        try:
+            completion = self.client_explainer.chat.completions.create(
+                model=self.config["model"],
+                temperature=0,
+                messages=[{"role": "system", "content": system_prompt},
+                            {"role": "user", "content": prompts}])
+        except:
+            completion = self.client_explainer.completions.create(
+                model=self.config["model"],
+                temperature=0,
+                prompt=f"""
+                {system_prompt}
+                {prompts}
+                """)
         print(completion)
         return completion.choices[0].message.content.strip()
 
