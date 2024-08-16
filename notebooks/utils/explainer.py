@@ -21,9 +21,12 @@ class Explainer:
         completion = self.client_explainer.chat.completions.create(
             model=self.config["model"],
             temperature=0,
+            top_p=0.9,  # Controls diversity
+            frequency_penalty=0.5,  # Reduces repetition
+            presence_penalty=0.0,  # Avoids introducing new ideas
             messages=[{"role": "system", "content": system_prompt},
-                      {"role": "user", "content": prompts}])                        
-        print(completion)
+                    {"role": "user", "content": prompts}],
+            )
         return completion.choices[0].message.content.strip()
 
     def stream_llm_call(self, prompts, additional_system_prompt=""):
@@ -33,6 +36,9 @@ class Explainer:
             model=self.config["model"],
             temperature=0,
             stream=True,
+            top_p=0.9,  # Controls diversity
+            frequency_penalty=0.5,  # Reduces repetition
+            presence_penalty=0.0,  # Avoids introducing new ideas
             messages=[{"role": "system", "content": system_prompt},
                         {"role": "user", "content": prompts}])
 
