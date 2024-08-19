@@ -8,7 +8,7 @@ The goal of this repository is to demonstrate basic use-cases for working with o
 We are not attempting to compile best practices but rather to showcase basic functionality.
 
 ## Prerequisites
-- Google colab using gpu
+- Google colab using gpu t4
 
 ## List of Jupyter Notebooks
 - [Basics](./notebooks/00_Basics.ipynb)
@@ -17,6 +17,10 @@ We are not attempting to compile best practices but rather to showcase basic fun
 - [Summarization](./notebooks/03_Summarization.ipynb)
 - [Retrieval Augmented Generation (RAG / QA)](./notebooks/04_Retrieval_augmented_generation.ipynb)
 - [Code generation and conversion](./notebooks/05_Code_generation_and_conversion.ipynb)
-- Agents and tools
-- Local LLM
-- Fine-tuning
+
+
+## List of Available Models
+- Llama 3 8B Instruct
+- Mistral 7B OpenOrca
+- Phi-3 mini 4k Instruct
+- Granite 8b Instruct
