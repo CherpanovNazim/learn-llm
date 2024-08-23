@@ -21,6 +21,6 @@ We are not attempting to compile best practices but rather to showcase basic fun
 
 ## List of Available Models
 - Llama 3 8B Instruct
-- Mistral 7B OpenOrca
+- Mistral 7B OpenOrca (add --chat_template learn-llm/configs/mistral-instruct.jinja)
 - Phi-3 mini 4k Instruct
 - Granite 8b Instruct
