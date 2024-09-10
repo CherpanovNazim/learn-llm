@@ -17,33 +17,23 @@ def contains_function(code: str) -> bool:
 
 
 def extract_code(
-    llm_output: str,
+    text,
     extract_only_funcs_and_classes: bool = True,
-    remove_starting_code: bool = True,
-) -> str:
-    """Extracts the python code from the LLM output"""
+    remove_starting_code: bool = True
+    ):
 
-    # Find all markdown blocks
-    markdown_block_pattern = r"```(\w+)\n(.*?)\n```"
-    matches = re.findall(markdown_block_pattern, llm_output, re.DOTALL)
-    markdown_blocks = [block_text for block_type, block_text in matches]
+    code_blocks = []
+    pattern = r'```python\n(.*?)\n```'
+    matches = re.findall(pattern, text, re.DOTALL)
 
-    # Extract code blocks
-    valid_code_blocks = []
-    for block_text in markdown_blocks:
-        segmenter = PythonSegmenter(block_text)
-        if segmenter.is_valid():
-            if extract_only_funcs_and_classes:
-                valid_code_blocks.extend(segmenter.extract_functions_classes())
-            else:
-                valid_code_blocks.append(block_text)
-    code = "\n\n".join(valid_code_blocks)
+    for match in matches:
+        code_blocks.append(match)
+    
+    code = "\n\n".join(code_blocks)
 
     if remove_starting_code or extract_only_funcs_and_classes:
-        # Removing the generated unit tests starting code
-        #   since we'll run them ourselves
-        code = code.split("if __name__")[0]
-        code = code.split("unittest.main(")[0]
+            code = code.split("if __name__")[0]
+            code = code.split("unittest.main(")[0]
 
     code = code.rstrip(" \n")
 
